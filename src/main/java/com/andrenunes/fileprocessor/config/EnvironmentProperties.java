@@ -4,8 +4,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("file")
-public class DirectoryProperties {
+@ConfigurationProperties(prefix = "file")
+public class EnvironmentProperties {
 
     private String DirectoryIn;
     private String DirectoryOut;

@@ -1,7 +1,7 @@
 package com.andrenunes.fileprocessor;
 
-import com.andrenunes.fileprocessor.config.DirectoryProperties;
-import com.andrenunes.fileprocessor.service.DirectoryWatcherService;
+import com.andrenunes.fileprocessor.config.EnvironmentProperties;
+import com.andrenunes.fileprocessor.implementation.service.DirectoryWatcherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class Application implements ApplicationRunner {
 	Logger logger = LoggerFactory.getLogger(Application.class);
 
 	@Autowired
-	private DirectoryProperties directoryProperties;
+	private EnvironmentProperties environmentProperties;
 
 	@Autowired
 	private DirectoryWatcherService directoryWatcherService;
@@ -27,7 +27,7 @@ public class Application implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		logger.info("Application started and watching files in: {}", directoryProperties.getIn());
+		logger.info("Application started and watching files in: {}", environmentProperties.getDirectoryIn());
 		directoryWatcherService.startProcessingFiles();
 	}
 }
