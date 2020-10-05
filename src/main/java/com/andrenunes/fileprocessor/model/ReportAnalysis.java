@@ -1,8 +1,8 @@
-package com.andrenunes.fileprocessor.domain;
+package com.andrenunes.fileprocessor.model;
 
 import java.io.Serializable;
 
-public class ReportResponse implements Serializable {
+public class ReportAnalysis implements Serializable {
 
     private static final long serialVersionUID = 4333459863634169399L;
 
@@ -11,10 +11,10 @@ public class ReportResponse implements Serializable {
     private long mostExpensiveSaleId;
     private String worstSeller;
 
-    public ReportResponse() {
+    public ReportAnalysis() {
     }
 
-    public ReportResponse(int totalOfCustomers, int totalOfSellers, long mostExpensiveSaleId, String worstSeller) {
+    public ReportAnalysis(int totalOfCustomers, int totalOfSellers, long mostExpensiveSaleId, String worstSeller) {
         this.totalOfCustomers = totalOfCustomers;
         this.totalOfSellers = totalOfSellers;
         this.mostExpensiveSaleId = mostExpensiveSaleId;

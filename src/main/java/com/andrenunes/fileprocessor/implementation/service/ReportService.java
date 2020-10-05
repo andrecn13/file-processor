@@ -1,7 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
-import com.andrenunes.fileprocessor.core.ReportDigester;
-import com.andrenunes.fileprocessor.domain.*;
+import com.andrenunes.fileprocessor.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,14 +18,12 @@ public class ReportService implements ReportDigester {
     Logger logger = LoggerFactory.getLogger(ReportService.class);
 
     @Override
-    public void generateReport(List<BaseEntity> entities, Path outputFile) {
-        ReportResponse reportResponse = new ReportResponse();
+    public void generateReport(List<Model> entities, Path outputFile) {
+        ReportAnalysis reportResponse = new ReportAnalysis();
         reportResponse.setTotalOfCustomers(getCustomers(entities).size());
         reportResponse.setTotalOfSellers(getSellers(entities).size());
         reportResponse.setMostExpensiveSaleId(getMostExpensiveSale(entities).getId());
         reportResponse.setWorstSeller(getWorstSeller(getSales(entities)));
-
-        getWorstSeller(getSales(entities));
 
         try(PrintWriter writer = new PrintWriter(outputFile.toFile())) {
             writer.println(String.format("Quantidade de clientes no arquivo de entrada: %d", reportResponse.getTotalOfCustomers()));
@@ -40,28 +37,28 @@ public class ReportService implements ReportDigester {
 
     }
 
-    private List<Customer> getCustomers(List<BaseEntity> entities) {
+    private List<Customer> getCustomers(List<Model> entities) {
         return entities.stream()
                 .filter(entity -> entity instanceof Customer)
                 .map(entity -> (Customer) entity)
                 .collect(Collectors.toList());
     }
 
-    private List<Seller> getSellers(List<BaseEntity> entities) {
+    private List<Seller> getSellers(List<Model> entities) {
         return entities.stream()
                 .filter(entity -> entity instanceof Seller)
                 .map(entity -> (Seller) entity)
                 .collect(Collectors.toList());
     }
 
-    private List<Sale> getSales(List<BaseEntity> entities) {
+    private List<Sale> getSales(List<Model> entities) {
         return entities.stream()
                 .filter(entity -> entity instanceof Sale)
                 .map(entity -> (Sale) entity)
                 .collect(Collectors.toList());
     }
 
-    public Sale getMostExpensiveSale(List<BaseEntity> entities) {
+    public Sale getMostExpensiveSale(List<Model> entities) {
         List<Sale> sales = getSales(entities);
 
         return Collections
@@ -72,7 +69,8 @@ public class ReportService implements ReportDigester {
         Map<String, BigDecimal> mapTotalsBySeller = sales.stream()
                 .collect(Collectors.toMap(Sale::getSellerName, this::totalPrice, BigDecimal::add));
 
-        return Collections.min(mapTotalsBySeller.entrySet(), Map.Entry.comparingByValue()).getKey();
+        return Collections
+                .min(mapTotalsBySeller.entrySet(), Map.Entry.comparingByValue()).getKey();
     }
 
     private BigDecimal totalPrice(Sale sale) {

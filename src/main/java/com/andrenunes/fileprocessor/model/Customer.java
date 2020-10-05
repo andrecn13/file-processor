@@ -1,8 +1,8 @@
-package com.andrenunes.fileprocessor.domain;
+package com.andrenunes.fileprocessor.model;
 
 import java.io.Serializable;
 
-public class Customer extends BaseEntity implements Serializable {
+public class Customer extends Model implements Serializable {
 
     private static final long serialVersionUID = -7009041900818932678L;
 

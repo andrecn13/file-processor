@@ -1,9 +1,9 @@
-package com.andrenunes.fileprocessor.domain;
+package com.andrenunes.fileprocessor.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class Item extends BaseEntity implements Serializable {
+public class Item extends Model implements Serializable {
 
     private static final long serialVersionUID = 572320479432859365L;
 

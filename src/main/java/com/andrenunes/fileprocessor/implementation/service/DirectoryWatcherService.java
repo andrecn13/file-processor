@@ -1,8 +1,7 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
 import com.andrenunes.fileprocessor.config.EnvironmentProperties;
-import com.andrenunes.fileprocessor.core.FileDigester;
-import com.andrenunes.fileprocessor.core.ReportDigester;
+import com.andrenunes.fileprocessor.implementation.parser.FileDigester;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +38,8 @@ public class DirectoryWatcherService {
                         reportDigester.generateReport(
                                 fileDigester.parseFile(inputFile),
                                 outputFile);
+
+                        logger.info("File successfully processed");
                     }
 
                 });

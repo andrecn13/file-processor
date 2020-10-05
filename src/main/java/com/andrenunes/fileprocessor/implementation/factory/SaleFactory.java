@@ -1,9 +1,8 @@
 package com.andrenunes.fileprocessor.implementation.factory;
 
-import com.andrenunes.fileprocessor.core.BaseEntityFactory;
-import com.andrenunes.fileprocessor.domain.BaseEntity;
-import com.andrenunes.fileprocessor.domain.Item;
-import com.andrenunes.fileprocessor.domain.Sale;
+import com.andrenunes.fileprocessor.model.Model;
+import com.andrenunes.fileprocessor.model.Item;
+import com.andrenunes.fileprocessor.model.Sale;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +13,7 @@ public class SaleFactory implements BaseEntityFactory {
     private static final String DELIMITER = "ç";
 
     @Override
-    public BaseEntity build(String record) {
+    public Model build(String record) {
         String[] splittedRecord = record.split(DELIMITER);
 
         return new Sale(

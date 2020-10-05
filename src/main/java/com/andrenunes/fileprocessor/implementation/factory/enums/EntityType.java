@@ -1,6 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.factory.enums;
 
-import com.andrenunes.fileprocessor.core.BaseEntityFactory;
+import com.andrenunes.fileprocessor.implementation.factory.BaseEntityFactory;
 import com.andrenunes.fileprocessor.implementation.factory.CustomerFactory;
 import com.andrenunes.fileprocessor.implementation.factory.SaleFactory;
 import com.andrenunes.fileprocessor.implementation.factory.SellerFactory;

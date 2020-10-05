@@ -1,8 +1,8 @@
 package com.andrenunes.fileprocessor.implementation.parser;
 
-import com.andrenunes.fileprocessor.domain.BaseEntity;
+import com.andrenunes.fileprocessor.model.Model;
 import com.andrenunes.fileprocessor.implementation.binder.EntityTypeBinder;
-import com.andrenunes.fileprocessor.core.BaseEntityFactory;
+import com.andrenunes.fileprocessor.implementation.factory.BaseEntityFactory;
 import com.andrenunes.fileprocessor.implementation.factory.enums.EntityType;
 
 import java.util.List;
@@ -13,13 +13,13 @@ public class FileParser {
 
     public FileParser() {}
 
-    public List<BaseEntity> parseLines(List<String> lines) {
+    public List<Model> parseLines(List<String> lines) {
         return lines.stream()
                 .map(mapToEntity())
                 .collect(Collectors.toList());
     }
 
-    private Function<String, BaseEntity> mapToEntity() {
+    private Function<String, Model> mapToEntity() {
         return line -> {
             EntityType entityType = getFactoryFromText(line);
             BaseEntityFactory factory = entityType.getFactory();
