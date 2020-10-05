@@ -1,4 +1,4 @@
-package com.andrenunes.fileprocessor.implementation.factory;
+package com.andrenunes.fileprocessor.core;
 
 import com.andrenunes.fileprocessor.domain.BaseEntity;
 

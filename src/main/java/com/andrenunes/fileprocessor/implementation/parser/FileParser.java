@@ -2,7 +2,7 @@ package com.andrenunes.fileprocessor.implementation.parser;
 
 import com.andrenunes.fileprocessor.domain.BaseEntity;
 import com.andrenunes.fileprocessor.implementation.binder.EntityTypeBinder;
-import com.andrenunes.fileprocessor.implementation.factory.BaseEntityFactory;
+import com.andrenunes.fileprocessor.core.BaseEntityFactory;
 import com.andrenunes.fileprocessor.implementation.factory.enums.EntityType;
 
 import java.util.List;

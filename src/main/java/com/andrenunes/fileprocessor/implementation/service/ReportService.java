@@ -1,5 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
+import com.andrenunes.fileprocessor.core.ReportDigester;
 import com.andrenunes.fileprocessor.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportService implements ReportDigester {
@@ -22,11 +24,15 @@ public class ReportService implements ReportDigester {
         reportResponse.setTotalOfCustomers(getCustomers(entities).size());
         reportResponse.setTotalOfSellers(getSellers(entities).size());
         reportResponse.setMostExpensiveSaleId(getMostExpensiveSale(entities).getId());
+        reportResponse.setWorstSeller(getWorstSeller(getSales(entities)));
+
+        getWorstSeller(getSales(entities));
 
         try(PrintWriter writer = new PrintWriter(outputFile.toFile())) {
             writer.println(String.format("Quantidade de clientes no arquivo de entrada: %d", reportResponse.getTotalOfCustomers()));
             writer.println(String.format("Quantidade de vendedor no arquivo de entrada: %d", reportResponse.getTotalOfSellers()));
             writer.println(String.format("ID da venda mais cara: %d", reportResponse.getMostExpensiveSaleId()));
+            writer.println(String.format("O pior vendedor: %s", reportResponse.getWorstSeller()));
 
         } catch (FileNotFoundException e) {
             logger.error("Report file not found: {}", outputFile.toString());
@@ -62,9 +68,19 @@ public class ReportService implements ReportDigester {
                 .max(sales, Comparator.comparing(this::totalPrice));
     }
 
+    private String getWorstSeller(List<Sale> sales) {
+        Map<String, BigDecimal> mapTotalsBySeller = sales.stream()
+                .collect(Collectors.toMap(Sale::getSellerName, this::totalPrice, BigDecimal::add));
+
+        return Collections.min(mapTotalsBySeller.entrySet(), Map.Entry.comparingByValue()).getKey();
+    }
+
     private BigDecimal totalPrice(Sale sale) {
-        return sale
-                .getItems()
+        return getSumItems(sale.getItems());
+    }
+
+    private BigDecimal getSumItems(List<Item> items) {
+        return items
                 .stream()
                 .map(item -> item.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);

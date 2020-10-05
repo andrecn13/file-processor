@@ -1,7 +1,7 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
+import com.andrenunes.fileprocessor.core.FileDigester;
 import com.andrenunes.fileprocessor.domain.BaseEntity;
-import com.andrenunes.fileprocessor.domain.ReportResponse;
 import com.andrenunes.fileprocessor.implementation.parser.FileParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

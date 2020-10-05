@@ -1,5 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.factory;
 
+import com.andrenunes.fileprocessor.core.BaseEntityFactory;
 import com.andrenunes.fileprocessor.domain.BaseEntity;
 import com.andrenunes.fileprocessor.domain.Item;
 

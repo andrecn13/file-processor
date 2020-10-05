@@ -1,6 +1,8 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
 import com.andrenunes.fileprocessor.config.EnvironmentProperties;
+import com.andrenunes.fileprocessor.core.FileDigester;
+import com.andrenunes.fileprocessor.core.ReportDigester;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

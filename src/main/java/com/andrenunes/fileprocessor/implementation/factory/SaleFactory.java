@@ -1,5 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.factory;
 
+import com.andrenunes.fileprocessor.core.BaseEntityFactory;
 import com.andrenunes.fileprocessor.domain.BaseEntity;
 import com.andrenunes.fileprocessor.domain.Item;
 import com.andrenunes.fileprocessor.domain.Sale;
@@ -8,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class SaleFactory implements BaseEntityFactory{
+public class SaleFactory implements BaseEntityFactory {
 
     private static final String DELIMITER = "ç";
 
