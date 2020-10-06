@@ -6,8 +6,8 @@ public class ReportAnalysis implements Serializable {
 
     private static final long serialVersionUID = 4333459863634169399L;
 
-    private int totalOfCustomers;
-    private int totalOfSellers;
+    private long totalOfCustomers;
+    private long totalOfSellers;
     private long mostExpensiveSaleId;
     private String worstSeller;
 
@@ -21,19 +21,19 @@ public class ReportAnalysis implements Serializable {
         this.worstSeller = worstSeller;
     }
 
-    public int getTotalOfCustomers() {
+    public long getTotalOfCustomers() {
         return totalOfCustomers;
     }
 
-    public void setTotalOfCustomers(int totalOfCustomers) {
+    public void setTotalOfCustomers(long totalOfCustomers) {
         this.totalOfCustomers = totalOfCustomers;
     }
 
-    public int getTotalOfSellers() {
+    public long getTotalOfSellers() {
         return totalOfSellers;
     }
 
-    public void setTotalOfSellers(int totalOfSellers) {
+    public void setTotalOfSellers(long totalOfSellers) {
         this.totalOfSellers = totalOfSellers;
     }
 

@@ -40,13 +40,18 @@ public class ServiceConfig {
     }
 
     @Bean
+    public DataAnalysisService dataAnalysisService() {
+        return new DataAnalysisService();
+    }
+
+    @Bean
     public FileDigester fileDigester() {
         return new FileService();
     }
 
     @Bean
-    public ReportDigester reportDigester() {
-        return new ReportService();
+    public ReportDigester reportDigester(DataAnalysisService dataAnalysisService) {
+        return new ReportService(dataAnalysisService);
     }
 
     @Bean
