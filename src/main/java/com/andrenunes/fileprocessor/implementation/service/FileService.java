@@ -1,6 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
-import com.andrenunes.fileprocessor.implementation.parser.FileDigester;
+import com.andrenunes.fileprocessor.implementation.service.interfaces.FileDigester;
 import com.andrenunes.fileprocessor.model.Model;
 import com.andrenunes.fileprocessor.implementation.parser.FileParser;
 import org.slf4j.Logger;

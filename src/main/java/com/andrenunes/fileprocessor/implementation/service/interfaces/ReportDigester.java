@@ -1,4 +1,4 @@
-package com.andrenunes.fileprocessor.implementation.service;
+package com.andrenunes.fileprocessor.implementation.service.interfaces;
 
 import com.andrenunes.fileprocessor.model.Model;
 

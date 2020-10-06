@@ -1,5 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
+import com.andrenunes.fileprocessor.implementation.service.interfaces.ReportDigester;
 import com.andrenunes.fileprocessor.model.Model;
 import com.andrenunes.fileprocessor.model.ReportAnalysis;
 import org.slf4j.Logger;
