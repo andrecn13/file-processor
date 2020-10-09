@@ -1,12 +1,10 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
+import com.andrenunes.fileprocessor.implementation.exception.SalesNotFoundException;
 import com.andrenunes.fileprocessor.model.*;
 
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class DataAnalysisService {
@@ -17,6 +15,7 @@ public class DataAnalysisService {
      * @return quantity
      */
     public Long getCustomersQuantity(List<Model> models) {
+        if (Objects.isNull(models)) return null;
         return models.stream()
                 .filter(entity -> entity instanceof Customer)
                 .map(entity -> (Customer) entity)
@@ -29,6 +28,7 @@ public class DataAnalysisService {
      * @return quantity
      */
     public Long getSellersQuantity(List<Model> models) {
+        if (Objects.isNull(models)) return null;
         return models.stream()
                 .filter(entity -> entity instanceof Seller)
                 .map(entity -> (Seller) entity)
@@ -42,6 +42,7 @@ public class DataAnalysisService {
      * @return list of {@link Sale}
      */
     public List<Sale> getSales(List<Model> models) {
+        if (Objects.isNull(models)) return null;
         return models.stream()
                 .filter(entity -> entity instanceof Sale)
                 .map(entity -> (Sale) entity)
@@ -57,6 +58,8 @@ public class DataAnalysisService {
     public Sale getMostExpensiveSale(List<Model> models) {
         List<Sale> sales = getSales(models);
 
+        if (Objects.isNull(sales)) throw new SalesNotFoundException();
+
         return Collections
                 .max(sales, Comparator.comparing(this::totalPrice));
     }
@@ -69,6 +72,8 @@ public class DataAnalysisService {
      */
     public String getWorstSeller(List<Model> models) {
         List<Sale> sales = getSales(models);
+
+        if (Objects.isNull(sales)) throw new SalesNotFoundException();
 
         Map<String, BigDecimal> mapTotalsBySeller = sales.stream()
                 .collect(Collectors.toMap(Sale::getSellerName, this::totalPrice, BigDecimal::add));

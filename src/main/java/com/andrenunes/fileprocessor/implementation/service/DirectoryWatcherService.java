@@ -6,6 +6,7 @@ import com.andrenunes.fileprocessor.implementation.service.interfaces.ReportDige
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
 import java.nio.file.*;
 
 public class DirectoryWatcherService {
@@ -36,9 +37,13 @@ public class DirectoryWatcherService {
                     logger.info("File detected: {}", inputFile.toString());
 
                     if (inputFile.toString().endsWith(environmentProperties.getExtensionIn())) {
-                        reportDigester.generateReport(
-                                fileDigester.parseFile(inputFile),
-                                outputFile);
+                        try {
+                            reportDigester.generateReport(
+                                    fileDigester.parseFile(inputFile),
+                                    outputFile);
+                        } catch (FileNotFoundException e) {
+                            logger.info("File not found: {}", e.getMessage());
+                        }
 
                         logger.info("File successfully processed");
                     }

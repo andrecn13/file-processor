@@ -1,5 +1,6 @@
 package com.andrenunes.fileprocessor.implementation.service;
 
+import com.andrenunes.fileprocessor.implementation.exception.SalesNotFoundException;
 import com.andrenunes.fileprocessor.model.Model;
 import com.andrenunes.fileprocessor.stubs.CustomerStub;
 import com.andrenunes.fileprocessor.stubs.SaleStub;
@@ -9,7 +10,7 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DataAnalysisServiceTest {
 
@@ -32,6 +33,12 @@ public class DataAnalysisServiceTest {
     }
 
     @Test
+    public void testIsNullWhenCustomersListIsNull() {
+        assertNull(dataAnalysisService.getCustomersQuantity(null));
+
+    }
+
+    @Test
     public void testGetSellerQuantity() {
         List<Model> sellers = Arrays.asList(
                 SellerStub.getSellerStub(),
@@ -41,6 +48,12 @@ public class DataAnalysisServiceTest {
         );
 
         assertEquals(Long.valueOf(4), dataAnalysisService.getSellersQuantity(sellers));
+    }
+
+    @Test
+    public void testIsNullWhenSellerListIsNull() {
+        assertNull(dataAnalysisService.getSellersQuantity(null));
+
     }
 
     @Test
@@ -56,5 +69,16 @@ public class DataAnalysisServiceTest {
 
         assertEquals("Joao", dataAnalysisService.getWorstSeller(sales));
     }
+
+    @Test(expected = SalesNotFoundException.class)
+    public void testGetMostExpensiveSaleFailWhenSaleListIsNull() {
+        Long id = dataAnalysisService.getMostExpensiveSale(null).getId();
+    }
+
+    @Test(expected = SalesNotFoundException.class)
+    public void testGetWorstSellerNameFailWhenSaleListIsNull() {
+        dataAnalysisService.getWorstSeller(null);
+    }
+
 
 }

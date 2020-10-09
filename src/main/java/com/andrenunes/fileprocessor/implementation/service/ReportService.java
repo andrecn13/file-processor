@@ -8,8 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Objects;
 
 public class ReportService implements ReportDigester {
     Logger logger = LoggerFactory.getLogger(ReportService.class);
@@ -21,7 +24,9 @@ public class ReportService implements ReportDigester {
     }
 
     @Override
-    public void generateReport(List<Model> entities, Path outputFile) {
+    public void generateReport(List<Model> entities, Path outputFile) throws FileNotFoundException {
+        if(Objects.isNull(outputFile)) throw new FileNotFoundException();
+
         ReportAnalysis reportResponse = new ReportAnalysis();
         reportResponse.setTotalOfCustomers(dataAnalysisService.getCustomersQuantity(entities));
         reportResponse.setTotalOfSellers(dataAnalysisService.getSellersQuantity(entities));

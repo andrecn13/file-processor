@@ -10,6 +10,13 @@
 
 ```./gradlew test```
 
+
+## Tech Stack
+
+ - Java 8 
+ - Spring boot 2
+ - Junit
+
 ## Teste para Desenvolvedor
 
 Você deve criar um sistema de análise de dados, onde o sistema deve importar lotes de arquivos, ler e analisar os dados
